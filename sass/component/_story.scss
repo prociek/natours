@@ -1,0 +1,83 @@
+.story {
+    background-color: rgba($color-white, .5);
+    width: 75%;
+    margin: 0 auto;
+    padding: 6rem 7rem;
+    transform: skewX(-12deg);
+    box-shadow: 0 2rem 4rem rgba($color-black, .2);
+
+    @include respond(tab-land) {
+        width: 80%;
+    }
+
+    @include respond(tab-port) {
+        transform: skewX(0);
+        width: 100%;
+        padding: 5rem 5rem;
+    }
+
+    &__shape {
+        float: left;
+        width: 15rem;
+        height: 15rem;
+        transform: skewX(12deg);
+        overflow: hidden;
+        position: relative;
+        border: 50%;
+
+        @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%);
+            border: none;
+        }
+
+        @include respond(tab-port) {
+            transform: skewX(0);
+        }
+
+        @include respond(phone) {
+            float: none;
+            margin: 0 auto 3rem auto;
+        }
+    }
+
+    &__img {
+        height: 100%;
+        transform: translateX(-3.5rem) scale(1.4);
+        transition: all .3s;
+        backface-visibility: hidden;
+    }
+
+    &__text {
+        transform: translateX(3rem) skewX(12deg);
+
+        @include respond(tab-port) {
+            transform: translateX(1rem) skewX(0);
+        }
+    }
+
+    &:hover &__img {
+        transform: translateX(-3.5rem) scale(1);
+        filter: blur(2px) brightness(.8);
+    }
+
+    &__figcaption {
+        text-transform: uppercase;
+        color: $color-white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        text-align: center;
+        font-size: 1.6rem;
+        opacity: 0;
+        transition: all .3s;
+    }
+
+    &:hover &__figcaption {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}

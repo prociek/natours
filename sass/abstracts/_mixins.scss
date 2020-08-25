@@ -1,0 +1,47 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*
+Media Queries Menager
+
+--- Brakepoints ---
+0 -> 600px          phone
+600px -> 900px      tab-port
+900px -> 1200px     tab-land
+1200px -> 1800px    desk
+1800px -> ...       big-desk
+
+ORDER  Base + Typography -> General Layout + Grid -> Page Layout -> Components
+
+*/
+
+@mixin respond($brakepoint) {
+    @if $brakepoint == phone {
+        @media (max-width: 37.5em) {@content}; // 600px/16
+    };
+
+    @if $brakepoint == tab-port {
+        @media (max-width: 56.25em) {@content}; // 900px/16
+    };
+
+    @if $brakepoint == tab-land {
+        @media (max-width: 75em) {@content}; // 1200px/16
+    };
+
+    @if $brakepoint == big-desk {
+        @media (min-width: 112.5em) {@content}; // 1800px/16
+    };
+   
+}
